@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from models import atividade_model
 from clients.pessoa_service_client import PessoaServiceClient
 
@@ -8,6 +8,13 @@ atividade_bp = Blueprint('atividade_bp', __name__)
 def listar_atividades():
     atividades = atividade_model.listar_atividades()
     return jsonify(atividades)
+
+@atividade_bp.route('/', methods=['POST'])
+def criar_atividade():
+    dados = request.json
+    atividade, status = atividade_model.criarAtividade(dados)
+    return jsonify(atividade), status
+
 
 @atividade_bp.route('/<int:id_atividade>', methods=['GET'])
 def obter_atividade(id_atividade):
@@ -27,3 +34,4 @@ def obter_atividade_para_professor(id_atividade, id_professor):
         return jsonify(atividade)
     except atividade_model.AtividadeNotFound:
         return jsonify({'erro': 'Atividade não encontrada'}), 404
+
