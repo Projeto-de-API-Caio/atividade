@@ -56,5 +56,5 @@ def criarAtividade(dados):
         
         
     except KeyError as e:
-        return {"erro": "Atividade não criada"}, 400
+        return {"erro": "Atividade não criada"}, 404
         

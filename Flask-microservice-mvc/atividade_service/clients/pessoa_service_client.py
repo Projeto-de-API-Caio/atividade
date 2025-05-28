@@ -1,6 +1,6 @@
 import requests
 
-PESSOA_SERVICE_URL = "http://localhost:5001/pessoas"
+PESSOA_SERVICE_URL = "http://localhost:8000/pessoas"
 
 class PessoaServiceClient:
     @staticmethod
